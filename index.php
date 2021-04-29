@@ -1,20 +1,21 @@
 <?php 
 $name = 'Nathaly Sipiran';
+$limitMonths=12;
 $jobs = [
   [ 'title'=> 'PHP Developer',
     'description'=>'This amazing',
     'visible'=>true,
-    'months'=>3
+    'months'=>2
   ],
   [ 'title'=> 'Python Dev',
     'description'=>'This amazing x2',
-    'visible'=>true,
-    'months'=>3
+    'visible'=>False,
+    'months'=>1
     
   ],
   [ 'title'=> 'Devops',
     'visible'=>False,
-    'months'=>3
+    'months'=>4
  
   ],
   [ 'title'=> 'React',
@@ -25,12 +26,12 @@ $jobs = [
   [ 'title'=> 'NodeJS',
     'description'=>'This amazing x4',
     'visible'=>true,
-    'months'=>3
+    'months'=>5
   ],
   [ 'title'=> 'Goland',
     'description'=>'This amazing x4',
     'visible'=>False,
-    'months'=>3
+    'months'=>12
   ],
 
 ];
@@ -85,8 +86,18 @@ $jobs = [
           <h3 class="border-bottom-gray" >Work Experience</h3>
           <ul>
             <?php
+            $totalMonths=0;
             $idx=0;
-            do{
+            echo 'jobs:';
+            echo count($jobs);
+            for($idx=0; $idx< count($jobs);$idx++){
+              $totalMonths += $jobs[$idx]['months'];
+              if($totalMonths>$limitMonths){
+                break;
+              }
+              if($jobs[$idx]['visible']!=true){
+                continue;
+              }
               echo '<li class="work-position">';
               echo '<h5>' . $jobs[$idx]['title'] . '</h5>';
               echo '<p>' . $jobs[$idx]['description'] . '</p>';
@@ -98,8 +109,7 @@ $jobs = [
               echo '<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>';
               echo '</ul>';
               echo '</li>';
-              $idx=$idx+1;
-            }while($idx<3); 
+            } 
               
             ?>
                   
