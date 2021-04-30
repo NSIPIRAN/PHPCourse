@@ -1,32 +1,11 @@
 <?php 
+require_once('jobs.php');
+
 $name = 'Nathaly Sipiran';
-$limitMonths=120;
-include('jobs.php');
-function getDuration($months) {
-  $years = floor($months / 12);
-  $extraMonths = $months % 12;
-
-  return "$years years $extraMonths months";
-}
-function printJob($job) {
-  if($job['visible'] == false) {
-    return;
-  }
-
-  echo '<li class="work-position">';
-  echo '<h5>' . $job['title'] . '</h5>';
-  echo '<p>' . $job['description'] . '</p>';
-  echo '<p>' . getDuration($job['months']) . '</p>';
-  echo '<strong>Achievements:</strong>';
-  echo '<ul>';
-  echo '<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>';
-  echo '<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>';
-  echo '<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>';
-  echo '</ul>';
-  echo '</li>';
-}
+$limitMonths = 2000;
 
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -48,16 +27,16 @@ function printJob($job) {
   <div class="container">
     <div id="resume-header" class="row">
       <div class="col-3">
-        <img id="profile-picture" src="https://ui-avatars.com/api/?name=Nath+Sipiran&size=255" alt="">
+        <img id="profile-picture" src="https://ui-avatars.com/api/?name=Nathaly+Sipiran&size=255" alt="">
       </div>
       <div class="col">
-        <h1> <?php echo $name;?> </h1>
+        <h1><?php echo $name; ?></h1>
         <h2>PHP Developer</h2>
         <ul>
           <li>Mail: nsipiran@unitru.edu.pe</li>
-          <li>Phone: +51981281724</li>
+          <li>Phone: 1234567890</li>
           <li>LinkedIn: https://linkedin.com</li>
-          <li>Twitter: @nathsip</li>
+          <li>Twitter: @nathysip</li>
         </ul>
       </div>
     </div>
@@ -75,23 +54,30 @@ function printJob($job) {
         <div>
           <h3 class="border-bottom-gray" >Work Experience</h3>
           <ul>
-          <?php
+            <?php
             $totalMonths = 0;
             for($idx = 0;$idx < count($jobs); $idx++) {
               // $totalMonths = $totalMonths + $jobs[$idx]['months'];
-              $totalMonths += $jobs[$idx]['months'];
+              $totalMonths += $jobs[$idx]->months;
               if($totalMonths > $limitMonths) {
                 break;
               }
 
-              printJob($jobs[$idx]);
+              printElement($jobs[$idx]);
             }
             ?>
-                  
           </ul>
         </div>
         <div>
             <h3 class="border-bottom-gray">Projects</h3>
+            <ul>
+            <?php
+            for($idx = 0;$idx < count($projects); $idx++) {
+              printElement($projects[$idx]);
+            }
+            ?>
+          </ul>
+
             <div class="project">
                 <h5>Project X</h5>
                 <div class="row">
